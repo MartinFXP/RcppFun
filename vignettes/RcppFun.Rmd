@@ -1,0 +1,52 @@
+---
+title: |
+  | RcppFun (Rcpp functions):
+  | Helper function implemented with Rcpp
+author: "Martin Pirkl"
+date: "`r Sys.Date()`"
+graphics: yes
+header-includes:
+    - \usepackage{xcolor}
+output: BiocStyle::html_document
+vignette: >
+    %\VignetteIndexEntry{RcppFun}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+
+
+# Installation and loading
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, out.width="125%", fig.align="center",
+                      strip.white=TRUE, warning=FALSE, tidy=TRUE,
+                      #out.extra='style="display:block; margin:auto;"',
+                      fig.height = 4, fig.width = 8, error=FALSE)
+fig.cap0 <- ""
+paltmp <- palette()
+paltmp[3] <- "blue"
+paltmp[4] <- "brown"
+palette(paltmp)
+```
+
+```{r, eval=FALSE}
+
+```
+
+# Small example
+
+```{r, fig.height=6, fig.width=10, fig.cap=fig.cap0}
+
+```
+
+# Session information
+
+```{r}
+sessionInfo()
+```
+
+# References:
+
+
