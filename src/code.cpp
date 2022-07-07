@@ -7,7 +7,8 @@
 
 using namespace Rcpp;
 
-// [[Rcpp::export]]
+//' @export
+// [[Rcpp::export(rng = false)]]
 String concatenate(std::string x, std::string y)
 {
     return wrap(x + ":" + y);
@@ -24,7 +25,7 @@ String concatenate(std::string x, std::string y)
 //' best match for the column
 //' in column one and a relative best match for the vector in column 2.
 //' @export
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 SEXP compareMV(CharacterMatrix x, CharacterVector y, std::string s = "-")
 {
     int r = x.nrow();
@@ -69,11 +70,11 @@ SEXP compareMV(CharacterMatrix x, CharacterVector y, std::string s = "-")
 //' @param x numeric nxm matrix with variables as columns
 //' @param exp exponent (see polynomial kernel)
 //' @param base basis (see polynomial kernal)
-//' @param fac factor (see polynomial kernel)
-//' @return extended matrix with ((n-1)*n)/2 + 2n columns
+//' @param coef0 factor (see polynomial kernel)
+//' @return extended matrix with ((n-1)*n)/2 + 2n + 1 columns
 //' @export
-// [[Rcpp::export]]
-SEXP extendData(NumericMatrix x, double exp = 0.5, double base = 2, double fac = 1)
+// [[Rcpp::export(rng = false)]]
+SEXP extendData(NumericMatrix x, double exp = 0.5, double base = 2, double coef0 = 1)
 {
     int nr = x.nrow(); // INTEGER(Rf_getAttrib(x, R_DimSymbol))[0];
     int nc = x.ncol(); // INTEGER(Rf_getAttrib(x, R_DimSymbol))[1];
@@ -106,7 +107,7 @@ SEXP extendData(NumericMatrix x, double exp = 0.5, double base = 2, double fac =
             count++;
         }
     }
-    m(_, count) = NumericVector(nr, 1.0);
+    m(_, count) = NumericVector(nr, coef0);
     cm[count] = "coef0";
     colnames(m) = cm;
     rownames(m) = rownames(x);
@@ -119,7 +120,7 @@ SEXP extendData(NumericMatrix x, double exp = 0.5, double base = 2, double fac =
 //' @param B numeric mxl matrix
 //' @return numeric nxl matrix
 //' @export
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 SEXP eigenMapMatMult(const Eigen::Map<Eigen::MatrixXd> A, Eigen::Map<Eigen::MatrixXd> B)
 {
     Eigen::MatrixXd C = A * B;
@@ -131,7 +132,7 @@ SEXP eigenMapMatMult(const Eigen::Map<Eigen::MatrixXd> A, Eigen::Map<Eigen::Matr
 //' @param x numeric nxn matrix (should be binary)
 //' @return transitive closure of x
 //' @export
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 SEXP transClose_W(NumericMatrix x)
 {
     int nr = INTEGER(Rf_getAttrib(x, R_DimSymbol))[0];
@@ -159,7 +160,7 @@ SEXP transClose_W(NumericMatrix x)
 //' @param v column index of deleted edge
 //' @return transitive closure of x
 //' @export
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 SEXP transClose_Del(NumericMatrix x, IntegerVector u, IntegerVector v)
 {
     int nr = INTEGER(Rf_getAttrib(x, R_DimSymbol))[0];
@@ -187,7 +188,7 @@ SEXP transClose_Del(NumericMatrix x, IntegerVector u, IntegerVector v)
 //' @param v column index of added edge
 //' @return transitive closure of x
 //' @export
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 SEXP transClose_Ins(NumericMatrix x, IntegerVector u, IntegerVector v)
 {
     int nr = INTEGER(Rf_getAttrib(x, R_DimSymbol))[0];
@@ -212,7 +213,7 @@ SEXP transClose_Ins(NumericMatrix x, IntegerVector u, IntegerVector v)
 //' @param x numeric nxm matrix
 //' @return numeric vector of length n with the maximum for each row
 //' @export
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 SEXP maxCol_row(NumericMatrix x)
 {
     int nr = INTEGER(Rf_getAttrib(x, R_DimSymbol))[0];

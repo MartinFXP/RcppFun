@@ -16,7 +16,6 @@ String concatenate(std::string x, std::string y);
 RcppExport SEXP _RcppFun_concatenate(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string >::type x(xSEXP);
     Rcpp::traits::input_parameter< std::string >::type y(ySEXP);
     rcpp_result_gen = Rcpp::wrap(concatenate(x, y));
@@ -28,7 +27,6 @@ SEXP compareMV(CharacterMatrix x, CharacterVector y, std::string s);
 RcppExport SEXP _RcppFun_compareMV(SEXP xSEXP, SEXP ySEXP, SEXP sSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< CharacterMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< CharacterVector >::type y(ySEXP);
     Rcpp::traits::input_parameter< std::string >::type s(sSEXP);
@@ -41,7 +39,6 @@ SEXP extendData(NumericMatrix x, double exp, double base, double fac);
 RcppExport SEXP _RcppFun_extendData(SEXP xSEXP, SEXP expSEXP, SEXP baseSEXP, SEXP facSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type exp(expSEXP);
     Rcpp::traits::input_parameter< double >::type base(baseSEXP);
@@ -55,7 +52,6 @@ SEXP eigenMapMatMult(const Eigen::Map<Eigen::MatrixXd> A, Eigen::Map<Eigen::Matr
 RcppExport SEXP _RcppFun_eigenMapMatMult(SEXP ASEXP, SEXP BSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const Eigen::Map<Eigen::MatrixXd> >::type A(ASEXP);
     Rcpp::traits::input_parameter< Eigen::Map<Eigen::MatrixXd> >::type B(BSEXP);
     rcpp_result_gen = Rcpp::wrap(eigenMapMatMult(A, B));
@@ -67,7 +63,6 @@ SEXP transClose_W(NumericMatrix x);
 RcppExport SEXP _RcppFun_transClose_W(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(transClose_W(x));
     return rcpp_result_gen;
@@ -78,7 +73,6 @@ SEXP transClose_Del(NumericMatrix x, IntegerVector u, IntegerVector v);
 RcppExport SEXP _RcppFun_transClose_Del(SEXP xSEXP, SEXP uSEXP, SEXP vSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type u(uSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type v(vSEXP);
@@ -91,7 +85,6 @@ SEXP transClose_Ins(NumericMatrix x, IntegerVector u, IntegerVector v);
 RcppExport SEXP _RcppFun_transClose_Ins(SEXP xSEXP, SEXP uSEXP, SEXP vSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type u(uSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type v(vSEXP);
@@ -104,7 +97,6 @@ SEXP maxCol_row(NumericMatrix x);
 RcppExport SEXP _RcppFun_maxCol_row(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(maxCol_row(x));
     return rcpp_result_gen;

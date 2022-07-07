@@ -5,4 +5,5 @@
 #' @export
 #' @import Rcpp RcppEigen
 #' @useDynLib RcppFun
+#' @importFrom Rcpp sourceCpp
 dummyfunction <- function() NULL
