@@ -14,14 +14,65 @@ String concatenate(std::string x, std::string y)
     return wrap(x + ":" + y);
 }
 
+//' Extend data by degree 2
+//'
+//' All interaction terms (including quadratic) will be computed.
+//'
+//' @param x numeric nxm matrix with variables as columns
+//' @param exp exponent (see polynomial kernel)
+//' @param base base (see polynomial kernal)
+//' @param coef0 factor (see polynomial kernel)
+//' @return extended matrix with ((n-1)*n)/2 + 2n + 1 columns
+//' @export
+// [[Rcpp::export(rng = false)]]
+SEXP extendData(NumericMatrix x, double exp = 0.5, double base = 2, double coef0 = 1)
+{
+    int nr = x.nrow(); // INTEGER(Rf_getAttrib(x, R_DimSymbol))[0];
+    int nc = x.ncol(); // INTEGER(Rf_getAttrib(x, R_DimSymbol))[1];
+    int nc2 = (nc * (nc - 1)) / 2 + 2 * nc + 1;
+    NumericMatrix m(nr, nc2);
+    CharacterVector cx = colnames(x);
+    CharacterVector cm(nc2);
+    double fac2 = pow(base * coef0, exp);
+    double fac3 = pow(base, exp);
+    int i, j;
+    int count = 0;
+    for (i = 0; i < nc; i++)
+    {
+        m(_, count) = x(_, i) * fac2;
+        cm[count] = cx[i];
+        count++;
+        m(_, count) = x(_, i) * x(_, i);
+        std::string s1{cx[i]};
+        cm[count] = concatenate(s1, s1);
+        count++;
+        if (i == nc - 1)
+        {
+            break;
+        }
+        for (j = i + 1; j < nc; j++)
+        {
+            m(_, count) = x(_, i) * x(_, j) * fac3;
+            std::string s2{cx[j]};
+            cm[count] = concatenate(s1, s2);
+            count++;
+        }
+    }
+    m(_, count) = NumericVector(nr, coef0);
+    cm[count] = "coef0";
+    colnames(m) = cm;
+    rownames(m) = rownames(x);
+    return wrap(m);
+}
+
 //' Compare columns and vector
 //'
 //' Matches columns of a matrix against a vector.
 //' @param x nxm character matrix
 //' @param y character vector of length n
-//' @param s string denoting the blanks in matrix and vector that
+//' @param s string denoting the gaps in matrix and vector that
 //' will not be used for comparison
-//' @return Numeric matrix with a relative (regarding to the blank string)
+//' @return Numeric matrix with a relative (regarding to the gap string)
 //' best match for the column
 //' in column one and a relative best match for the vector in column 2.
 //' @export
@@ -61,57 +112,6 @@ SEXP compareMV(CharacterMatrix x, CharacterVector y, std::string s = "-")
         a(i, 1) = m / lm;
     }
     return wrap(a);
-}
-
-//' Extend data by degree 2
-//'
-//' All interaction terms (including quadratics) will be computed.
-//'
-//' @param x numeric nxm matrix with variables as columns
-//' @param exp exponent (see polynomial kernel)
-//' @param base basis (see polynomial kernal)
-//' @param coef0 factor (see polynomial kernel)
-//' @return extended matrix with ((n-1)*n)/2 + 2n + 1 columns
-//' @export
-// [[Rcpp::export(rng = false)]]
-SEXP extendData(NumericMatrix x, double exp = 0.5, double base = 2, double coef0 = 1)
-{
-    int nr = x.nrow(); // INTEGER(Rf_getAttrib(x, R_DimSymbol))[0];
-    int nc = x.ncol(); // INTEGER(Rf_getAttrib(x, R_DimSymbol))[1];
-    int nc2 = (nc * (nc - 1)) / 2 + 2 * nc + 1;
-    NumericMatrix m(nr, nc2);
-    CharacterVector cx = colnames(x);
-    CharacterVector cm(nc2);
-    double fac2 = pow(base * fac, exp);
-    double fac3 = pow(base, exp);
-    int i, j;
-    int count = 0;
-    for (i = 0; i < nc; i++)
-    {
-        m(_, count) = x(_, i) * fac2;
-        cm[count] = cx[i];
-        count++;
-        m(_, count) = x(_, i) * x(_, i);
-        std::string s1{cx[i]};
-        cm[count] = concatenate(s1, s1);
-        count++;
-        if (i == nc - 1)
-        {
-            break;
-        }
-        for (j = i + 1; j < nc; j++)
-        {
-            m(_, count) = x(_, i) * x(_, j) * fac3;
-            std::string s2{cx[j]};
-            cm[count] = concatenate(s1, s2);
-            count++;
-        }
-    }
-    m(_, count) = NumericVector(nr, coef0);
-    cm[count] = "coef0";
-    colnames(m) = cm;
-    rownames(m) = rownames(x);
-    return wrap(m);
 }
 
 //' Matrix multiplication
