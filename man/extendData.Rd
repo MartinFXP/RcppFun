@@ -4,20 +4,20 @@
 \alias{extendData}
 \title{Extend data by degree 2}
 \usage{
-extendData(x, exp = 0.5, base = 2, fac = 1)
+extendData(x, exp = 0.5, base = 2, coef0 = 1)
 }
 \arguments{
 \item{x}{numeric nxm matrix with variables as columns}
 
 \item{exp}{exponent (see polynomial kernel)}
 
-\item{base}{basis (see polynomial kernal)}
+\item{base}{base (see polynomial kernal)}
 
-\item{fac}{factor (see polynomial kernel)}
+\item{coef0}{factor (see polynomial kernel)}
 }
 \value{
-extended matrix with ((n-1)*n)/2 + 2n columns
+extended matrix with ((n-1)*n)/2 + 2n + 1 columns
 }
 \description{
-All interaction terms (including quadratics) will be computed.
+All interaction terms (including quadratic) will be computed.
 }

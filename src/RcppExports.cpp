@@ -22,6 +22,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// extendData
+SEXP extendData(NumericMatrix x, double exp, double base, double coef0);
+RcppExport SEXP _RcppFun_extendData(SEXP xSEXP, SEXP expSEXP, SEXP baseSEXP, SEXP coef0SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type exp(expSEXP);
+    Rcpp::traits::input_parameter< double >::type base(baseSEXP);
+    Rcpp::traits::input_parameter< double >::type coef0(coef0SEXP);
+    rcpp_result_gen = Rcpp::wrap(extendData(x, exp, base, coef0));
+    return rcpp_result_gen;
+END_RCPP
+}
 // compareMV
 SEXP compareMV(CharacterMatrix x, CharacterVector y, std::string s);
 RcppExport SEXP _RcppFun_compareMV(SEXP xSEXP, SEXP ySEXP, SEXP sSEXP) {
@@ -31,19 +44,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< CharacterVector >::type y(ySEXP);
     Rcpp::traits::input_parameter< std::string >::type s(sSEXP);
     rcpp_result_gen = Rcpp::wrap(compareMV(x, y, s));
-    return rcpp_result_gen;
-END_RCPP
-}
-// extendData
-SEXP extendData(NumericMatrix x, double exp, double base, double fac);
-RcppExport SEXP _RcppFun_extendData(SEXP xSEXP, SEXP expSEXP, SEXP baseSEXP, SEXP facSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
-    Rcpp::traits::input_parameter< double >::type exp(expSEXP);
-    Rcpp::traits::input_parameter< double >::type base(baseSEXP);
-    Rcpp::traits::input_parameter< double >::type fac(facSEXP);
-    rcpp_result_gen = Rcpp::wrap(extendData(x, exp, base, fac));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -105,8 +105,8 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_RcppFun_concatenate", (DL_FUNC) &_RcppFun_concatenate, 2},
-    {"_RcppFun_compareMV", (DL_FUNC) &_RcppFun_compareMV, 3},
     {"_RcppFun_extendData", (DL_FUNC) &_RcppFun_extendData, 4},
+    {"_RcppFun_compareMV", (DL_FUNC) &_RcppFun_compareMV, 3},
     {"_RcppFun_eigenMapMatMult", (DL_FUNC) &_RcppFun_eigenMapMatMult, 2},
     {"_RcppFun_transClose_W", (DL_FUNC) &_RcppFun_transClose_W, 1},
     {"_RcppFun_transClose_Del", (DL_FUNC) &_RcppFun_transClose_Del, 3},

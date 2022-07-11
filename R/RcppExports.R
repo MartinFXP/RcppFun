@@ -3,7 +3,21 @@
 
 #' @export
 concatenate <- function(x, y) {
-    .Call('_RcppFun_concatenate', PACKAGE = 'RcppFun', x, y)
+    .Call(`_RcppFun_concatenate`, x, y)
+}
+
+#' Extend data by degree 2
+#'
+#' All interaction terms (including quadratic) will be computed.
+#'
+#' @param x numeric nxm matrix with variables as columns
+#' @param exp exponent (see polynomial kernel)
+#' @param base base (see polynomial kernal)
+#' @param coef0 factor (see polynomial kernel)
+#' @return extended matrix with ((n-1)*n)/2 + 2n + 1 columns
+#' @export
+extendData <- function(x, exp = 0.5, base = 2, coef0 = 1) {
+    .Call(`_RcppFun_extendData`, x, exp, base, coef0)
 }
 
 #' Compare columns and vector
@@ -11,28 +25,14 @@ concatenate <- function(x, y) {
 #' Matches columns of a matrix against a vector.
 #' @param x nxm character matrix
 #' @param y character vector of length n
-#' @param s string denoting the blanks in matrix and vector that
+#' @param s string denoting the gaps in matrix and vector that
 #' will not be used for comparison
-#' @return Numeric matrix with a relative (regarding to the blank string)
+#' @return Numeric matrix with a relative (regarding to the gap string)
 #' best match for the column
 #' in column one and a relative best match for the vector in column 2.
 #' @export
 compareMV <- function(x, y, s = "-") {
-    .Call('_RcppFun_compareMV', PACKAGE = 'RcppFun', x, y, s)
-}
-
-#' Extend data by degree 2
-#'
-#' All interaction terms (including quadratics) will be computed.
-#'
-#' @param x numeric nxm matrix with variables as columns
-#' @param exp exponent (see polynomial kernel)
-#' @param base basis (see polynomial kernal)
-#' @param fac factor (see polynomial kernel)
-#' @return extended matrix with ((n-1)*n)/2 + 2n columns
-#' @export
-extendData <- function(x, exp = 0.5, base = 2, fac = 1) {
-    .Call('_RcppFun_extendData', PACKAGE = 'RcppFun', x, exp, base, fac)
+    .Call(`_RcppFun_compareMV`, x, y, s)
 }
 
 #' Matrix multiplication
@@ -42,7 +42,7 @@ extendData <- function(x, exp = 0.5, base = 2, fac = 1) {
 #' @return numeric nxl matrix
 #' @export
 eigenMapMatMult <- function(A, B) {
-    .Call('_RcppFun_eigenMapMatMult', PACKAGE = 'RcppFun', A, B)
+    .Call(`_RcppFun_eigenMapMatMult`, A, B)
 }
 
 #' Transitive closure
@@ -51,7 +51,7 @@ eigenMapMatMult <- function(A, B) {
 #' @return transitive closure of x
 #' @export
 transClose_W <- function(x) {
-    .Call('_RcppFun_transClose_W', PACKAGE = 'RcppFun', x)
+    .Call(`_RcppFun_transClose_W`, x)
 }
 
 #' Transitive closure after deletion
@@ -62,7 +62,7 @@ transClose_W <- function(x) {
 #' @return transitive closure of x
 #' @export
 transClose_Del <- function(x, u, v) {
-    .Call('_RcppFun_transClose_Del', PACKAGE = 'RcppFun', x, u, v)
+    .Call(`_RcppFun_transClose_Del`, x, u, v)
 }
 
 #' Transitive closure after addition
@@ -73,7 +73,7 @@ transClose_Del <- function(x, u, v) {
 #' @return transitive closure of x
 #' @export
 transClose_Ins <- function(x, u, v) {
-    .Call('_RcppFun_transClose_Ins', PACKAGE = 'RcppFun', x, u, v)
+    .Call(`_RcppFun_transClose_Ins`, x, u, v)
 }
 
 #' Transitive closure after deletion
@@ -82,6 +82,6 @@ transClose_Ins <- function(x, u, v) {
 #' @return numeric vector of length n with the maximum for each row
 #' @export
 maxCol_row <- function(x) {
-    .Call('_RcppFun_maxCol_row', PACKAGE = 'RcppFun', x)
+    .Call(`_RcppFun_maxCol_row`, x)
 }
 

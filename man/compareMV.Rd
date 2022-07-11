@@ -11,11 +11,11 @@ compareMV(x, y, s = "-")
 
 \item{y}{character vector of length n}
 
-\item{s}{string denoting the blanks in matrix and vector that
+\item{s}{string denoting the gaps in matrix and vector that
 will not be used for comparison}
 }
 \value{
-Numeric matrix with a relative (regarding to the blank string)
+Numeric matrix with a relative (regarding to the gap string)
 best match for the column
 in column one and a relative best match for the vector in column 2.
 }
