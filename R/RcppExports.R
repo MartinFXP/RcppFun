@@ -2,8 +2,11 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' @export
+#' @import Rcpp RcppEigen
+#' @useDynLib RcppFun, .registration=TRUE
+#' @importFrom Rcpp sourceCpp
 concatenate <- function(x, y) {
-    .Call(`_RcppFun_concatenate`, x, y)
+    .Call('_RcppFun_concatenate', PACKAGE = 'RcppFun', x, y)
 }
 
 #' Extend data by degree 2
@@ -17,7 +20,7 @@ concatenate <- function(x, y) {
 #' @return extended matrix with ((n-1)*n)/2 + 2n + 1 columns
 #' @export
 extendData <- function(x, exp = 0.5, base = 2, coef0 = 1) {
-    .Call(`_RcppFun_extendData`, x, exp, base, coef0)
+    .Call('_RcppFun_extendData', PACKAGE = 'RcppFun', x, exp, base, coef0)
 }
 
 #' Compare columns and vector
@@ -32,7 +35,7 @@ extendData <- function(x, exp = 0.5, base = 2, coef0 = 1) {
 #' in column one and a relative best match for the vector in column 2.
 #' @export
 compareMV <- function(x, y, s = "-") {
-    .Call(`_RcppFun_compareMV`, x, y, s)
+    .Call('_RcppFun_compareMV', PACKAGE = 'RcppFun', x, y, s)
 }
 
 #' Matrix multiplication
@@ -42,7 +45,7 @@ compareMV <- function(x, y, s = "-") {
 #' @return numeric nxl matrix
 #' @export
 eigenMapMatMult <- function(A, B) {
-    .Call(`_RcppFun_eigenMapMatMult`, A, B)
+    .Call('_RcppFun_eigenMapMatMult', PACKAGE = 'RcppFun', A, B)
 }
 
 #' Transitive closure
@@ -51,7 +54,7 @@ eigenMapMatMult <- function(A, B) {
 #' @return transitive closure of x
 #' @export
 transClose_W <- function(x) {
-    .Call(`_RcppFun_transClose_W`, x)
+    .Call('_RcppFun_transClose_W', PACKAGE = 'RcppFun', x)
 }
 
 #' Transitive closure after deletion
@@ -62,7 +65,7 @@ transClose_W <- function(x) {
 #' @return transitive closure of x
 #' @export
 transClose_Del <- function(x, u, v) {
-    .Call(`_RcppFun_transClose_Del`, x, u, v)
+    .Call('_RcppFun_transClose_Del', PACKAGE = 'RcppFun', x, u, v)
 }
 
 #' Transitive closure after addition
@@ -73,7 +76,7 @@ transClose_Del <- function(x, u, v) {
 #' @return transitive closure of x
 #' @export
 transClose_Ins <- function(x, u, v) {
-    .Call(`_RcppFun_transClose_Ins`, x, u, v)
+    .Call('_RcppFun_transClose_Ins', PACKAGE = 'RcppFun', x, u, v)
 }
 
 #' Transitive closure after deletion
@@ -82,6 +85,6 @@ transClose_Ins <- function(x, u, v) {
 #' @return numeric vector of length n with the maximum for each row
 #' @export
 maxCol_row <- function(x) {
-    .Call(`_RcppFun_maxCol_row`, x)
+    .Call('_RcppFun_maxCol_row', PACKAGE = 'RcppFun', x)
 }
 

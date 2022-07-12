@@ -8,6 +8,9 @@
 using namespace Rcpp;
 
 //' @export
+//' @import Rcpp RcppEigen
+//' @useDynLib RcppFun, .registration=TRUE
+//' @importFrom Rcpp sourceCpp
 // [[Rcpp::export(rng = false)]]
 String concatenate(std::string x, std::string y)
 {

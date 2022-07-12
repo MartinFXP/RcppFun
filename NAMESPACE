@@ -2,7 +2,6 @@
 
 export(compareMV)
 export(concatenate)
-export(dummyfunction)
 export(eigenMapMatMult)
 export(extendData)
 export(maxCol_row)
@@ -12,4 +11,4 @@ export(transClose_W)
 import(Rcpp)
 import(RcppEigen)
 importFrom(Rcpp,sourceCpp)
-useDynLib(RcppFun)
+useDynLib(RcppFun, .registration=TRUE)
