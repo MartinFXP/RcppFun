@@ -11,6 +11,17 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// perRow
+SEXP perRow(NumericMatrix m, NumericVector v);
+RcppExport SEXP _RcppFun_perRow(SEXP mSEXP, SEXP vSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type m(mSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type v(vSEXP);
+    rcpp_result_gen = Rcpp::wrap(perRow(m, v));
+    return rcpp_result_gen;
+END_RCPP
+}
 // concatenate
 String concatenate(std::string x, std::string y);
 RcppExport SEXP _RcppFun_concatenate(SEXP xSEXP, SEXP ySEXP) {
@@ -104,6 +115,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_RcppFun_perRow", (DL_FUNC) &_RcppFun_perRow, 2},
     {"_RcppFun_concatenate", (DL_FUNC) &_RcppFun_concatenate, 2},
     {"_RcppFun_extendData", (DL_FUNC) &_RcppFun_extendData, 4},
     {"_RcppFun_compareMV", (DL_FUNC) &_RcppFun_compareMV, 3},

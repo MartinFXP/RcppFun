@@ -7,6 +7,27 @@
 
 using namespace Rcpp;
 
+//' Vector times matrix rows
+//'
+//' Multiply a vector to each row of a matrix
+//' Alternative to t(t(m)*v) in R
+//' @param m numeric rxc matrix
+//' @param v numeric vector with length c
+//' @return rxc matrix with values m[i,j]*v[j]
+//' @export
+// [[Rcpp::export(rng = false)]]
+SEXP perRow(NumericMatrix m, NumericVector v)
+{
+    int r = m.nrow();
+    int c = m.ncol();
+    for (int i=0; i<r; i++) {
+        for (int j=0; j<c; j++) {
+            m(i, j) = m(i, j)*v[j];
+        }
+    }
+    return wrap(m);
+}
+
 //' @export
 //' @import Rcpp RcppEigen
 //' @useDynLib RcppFun, .registration=TRUE
