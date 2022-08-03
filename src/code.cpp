@@ -10,7 +10,7 @@ using namespace Rcpp;
 //' Vector times matrix rows
 //'
 //' Multiply a vector to each row of a matrix
-//' Alternative to t(t(m)*v) in R
+//' Alternative to t(t(m)*v) in pure R
 //' @param m numeric rxc matrix
 //' @param v numeric vector with length c
 //' @return rxc matrix with values m[i,j]*v[j]
@@ -44,7 +44,7 @@ String concatenate(std::string x, std::string y)
 //'
 //' @param x numeric nxm matrix with variables as columns
 //' @param exp exponent (see polynomial kernel)
-//' @param base base (see polynomial kernal)
+//' @param base base (see polynomial kernel)
 //' @param coef0 factor (see polynomial kernel)
 //' @return extended matrix with ((n-1)*n)/2 + 2n + 1 columns
 //' @export
@@ -232,7 +232,7 @@ SEXP transClose_Ins(NumericMatrix x, IntegerVector u, IntegerVector v)
     return wrap(x);
 }
 
-//' Transitive closure after deletion
+//' Maximum per row
 //'
 //' @param x numeric nxm matrix
 //' @return numeric vector of length n with the maximum for each row
