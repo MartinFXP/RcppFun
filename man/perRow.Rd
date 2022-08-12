@@ -16,5 +16,5 @@ rxc matrix with values m[i,j]*v[j]
 }
 \description{
 Multiply a vector to each row of a matrix
-Alternative to t(t(m)*v) in R
+Alternative to t(t(m)*v) in pure R
 }

@@ -57,24 +57,9 @@ SEXP whichExtreme(NumericMatrix m, int type = 1, int extreme = 1)
                 }
             }
         }
-        return wrap(idx);
+        return wrap(idx+1);
     }
 }
-
-//' Enumerate quasi-orders
-//'
-//' Enumerates all possible and unique quasi-orders
-//' of size n
-//' @param n number of nodes
-//' @param closed if TRUE, enumerates unique transitively
-//' closed quasi-orders
-//' @return list of all unique quasi-orders as adjacency matrices
-//' @export
-// [[Rcpp::export(rng = false)]]
-/* SEXP perRow(int n, std::string closed = 'TRUE')
-{
-    NumericMatrix m(n , n);
-} */
 
 //' Vector times matrix rows
 //'

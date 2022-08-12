@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{maxCol_row}
 \alias{maxCol_row}
-\title{Transitive closure after deletion}
+\title{Maximum per row}
 \usage{
 maxCol_row(x)
 }
@@ -13,5 +13,5 @@ maxCol_row(x)
 numeric vector of length n with the maximum for each row
 }
 \description{
-Transitive closure after deletion
+Maximum per row
 }

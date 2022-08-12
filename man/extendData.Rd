@@ -11,7 +11,7 @@ extendData(x, exp = 0.5, base = 2, coef0 = 1)
 
 \item{exp}{exponent (see polynomial kernel)}
 
-\item{base}{base (see polynomial kernal)}
+\item{base}{base (see polynomial kernel)}
 
 \item{coef0}{factor (see polynomial kernel)}
 }

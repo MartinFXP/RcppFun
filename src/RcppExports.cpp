@@ -11,6 +11,18 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// whichExtreme
+SEXP whichExtreme(NumericMatrix m, int type, int extreme);
+RcppExport SEXP _RcppFun_whichExtreme(SEXP mSEXP, SEXP typeSEXP, SEXP extremeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type m(mSEXP);
+    Rcpp::traits::input_parameter< int >::type type(typeSEXP);
+    Rcpp::traits::input_parameter< int >::type extreme(extremeSEXP);
+    rcpp_result_gen = Rcpp::wrap(whichExtreme(m, type, extreme));
+    return rcpp_result_gen;
+END_RCPP
+}
 // perRow
 SEXP perRow(NumericMatrix m, NumericVector v);
 RcppExport SEXP _RcppFun_perRow(SEXP mSEXP, SEXP vSEXP) {
@@ -115,6 +127,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_RcppFun_whichExtreme", (DL_FUNC) &_RcppFun_whichExtreme, 3},
     {"_RcppFun_perRow", (DL_FUNC) &_RcppFun_perRow, 2},
     {"_RcppFun_concatenate", (DL_FUNC) &_RcppFun_concatenate, 2},
     {"_RcppFun_extendData", (DL_FUNC) &_RcppFun_extendData, 4},

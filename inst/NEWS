@@ -1,0 +1,2 @@
+0.99.1:
+	added whichExtreme function for finding row/column indices of max/min values of a matrix
