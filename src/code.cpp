@@ -7,6 +7,75 @@
 
 using namespace Rcpp;
 
+//' whichExtreme
+//'
+//' Get the index of the minimum/maximum for each row/column
+//' of a matrix
+//' @param m rxc matrix
+//' @param type 1 for row and 2 for column indices
+//' @param extreme 1 for minimum and 2 for maximum
+//' @return vector of indices
+//' @export
+// [[Rcpp::export(rng = false)]]
+SEXP whichExtreme(NumericMatrix m, int type = 1, int extreme = 1)
+{
+    int r = m.nrow();
+    int c = m.ncol();
+    if (type == 1)
+    {
+        NumericVector idx(r);
+        NumericVector val(r);
+        for (int i = 0; i < r; i++) {
+            idx[i] = 0;
+            val[i] = m(i,0);
+            for (int j = 1; j < c; j++) {
+                if (m(i,j) < val[i] && extreme == 1) {
+                    idx[i] = j;
+                    val[i] = m(i,j);
+                }
+                if (m(i,j) > val[i] && extreme == 2) {
+                    idx[i] = j;
+                    val[i] = m(i,j);
+                }
+            }
+        }
+        return wrap(idx);
+    } else {
+        NumericVector idx(c);
+        NumericVector val(c);
+        for (int i = 0; i < c; i++) {
+            idx[i] = 0;
+            val[i] = m(0,i);
+            for (int j = 1; j < r; j++) {
+                if (m(j,i) < val[i] && extreme == 1) {
+                    idx[i] = j;
+                    val[i] = m(j,i);
+                }
+                if (m(j,i) > val[i] && extreme == 2) {
+                    idx[i] = j;
+                    val[i] = m(j,i);
+                }
+            }
+        }
+        return wrap(idx);
+    }
+}
+
+//' Enumerate quasi-orders
+//'
+//' Enumerates all possible and unique quasi-orders
+//' of size n
+//' @param n number of nodes
+//' @param closed if TRUE, enumerates unique transitively
+//' closed quasi-orders
+//' @return list of all unique quasi-orders as adjacency matrices
+//' @export
+// [[Rcpp::export(rng = false)]]
+/* SEXP perRow(int n, std::string closed = 'TRUE')
+{
+    NumericMatrix m(n , n);
+} */
+
 //' Vector times matrix rows
 //'
 //' Multiply a vector to each row of a matrix
