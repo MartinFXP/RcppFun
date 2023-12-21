@@ -7,6 +7,52 @@
 
 using namespace Rcpp;
 
+//' hcipp
+//'
+//' Harrelson's concordance index
+//' @param x vector of the continuous groud truth
+//' @param y vector of the predicted values
+//' @param c vector indicating censored (0) or uncensored (1) data
+//' @return h vector of length three with number of
+//' concordances, discordances and the index
+//' @export
+// [[Rcpp::export(rng = false)]]
+NumericVector hcipp(NumericVector x, NumericVector y, NumericVector c) {
+    double cc = 0;
+    double dc = 0;
+    int l = x.length();
+    for (int i = 0; i < l - 1; i++) {
+        for (int j = i + 1; j < l; j++) {
+            if (x[i] < x[j] && y[i] < y[j] && c[i] == 1 && c[j] == 1) {
+                cc++;
+            }
+            if (x[i] > x[j] && y[i] > y[j] && c[i] == 1 && c[j] == 1) {
+                cc++;
+            }
+            if (x[i] < x[j] && y[i] < y[j] && c[i] == 1 && c[j] == 0) {
+                cc++;
+            }
+            if (x[i] > x[j] && y[i] > y[j] && c[i] == 0 && c[j] == 1) {
+                cc++;
+            }
+            if (x[i] < x[j] && y[i] > y[j] && c[i] == 1 && c[j] == 1) {
+                dc++;
+            }
+            if (x[i] > x[j] && y[i] < y[j] && c[i] == 1 && c[j] == 1) {
+                dc++;
+            }
+            if (x[i] < x[j] && y[i] > y[j] && c[i] == 1 && c[j] == 0) {
+                dc++;
+            }
+            if (x[i] > x[j] && y[i] < y[j] && c[i] == 0 && c[j] == 1) {
+                dc++;
+            }
+        }
+    }
+    NumericVector h = {cc,dc,cc/(cc+dc)};
+    return wrap(h);
+}
+
 //' whichExtreme
 //'
 //' Get the index of the minimum/maximum for each row/column

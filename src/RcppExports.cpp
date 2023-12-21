@@ -11,6 +11,18 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// hcipp
+NumericVector hcipp(NumericVector x, NumericVector y, NumericVector c);
+RcppExport SEXP _RcppFun_hcipp(SEXP xSEXP, SEXP ySEXP, SEXP cSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type c(cSEXP);
+    rcpp_result_gen = Rcpp::wrap(hcipp(x, y, c));
+    return rcpp_result_gen;
+END_RCPP
+}
 // whichExtreme
 SEXP whichExtreme(NumericMatrix m, int type, int extreme);
 RcppExport SEXP _RcppFun_whichExtreme(SEXP mSEXP, SEXP typeSEXP, SEXP extremeSEXP) {
@@ -127,6 +139,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_RcppFun_hcipp", (DL_FUNC) &_RcppFun_hcipp, 3},
     {"_RcppFun_whichExtreme", (DL_FUNC) &_RcppFun_whichExtreme, 3},
     {"_RcppFun_perRow", (DL_FUNC) &_RcppFun_perRow, 2},
     {"_RcppFun_concatenate", (DL_FUNC) &_RcppFun_concatenate, 2},
