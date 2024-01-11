@@ -10,7 +10,7 @@ using namespace Rcpp;
 //' hcipp
 //'
 //' Harrelson's concordance index
-//' @param x vector of the continuous groud truth
+//' @param x vector of the continuous ground truth
 //' @param y vector of the predicted values
 //' @param c vector indicating censored (0) or uncensored (1) data
 //' @return h vector of length three with number of
